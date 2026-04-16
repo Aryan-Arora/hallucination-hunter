@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --page-bg: #050506;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  
+  /* Teal Energy */
+  --teal-glow: rgba(0, 201, 177, 0.25);
+  --teal-base: #0a0f0e;
+  --teal-border: rgba(0, 201, 177, 0.3);
+
+  /* Purple Energy */
+  --purple-glow: rgba(124, 58, 237, 0.25);
+  --purple-base: #0d0a14;
+  --purple-border: rgba(124, 58, 237, 0.3);
+
+  /* Blue Energy */
+  --blue-glow: rgba(59, 91, 219, 0.25);
+  --blue-base: #080a14;
+  --blue-border: rgba(59, 91, 219, 0.3);
+
+  /* Neutral */
+  --neutral-base: #0d0d10;
+  --neutral-border: #1e1e26;
+}
+
+body {
+  margin: 0;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 800;
+}
+
+.luminous-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 320px;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+  padding: 24px;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.tile {
+  position: relative;
+  border-radius: 24px;
+  padding: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: black; /* Solid center */
+}
+
+.tile:hover {
+  transform: scale(0.995);
+}
+
+/* --- Edge Glow Logic (Lights through entire edge, center empty) --- */
+
+.tile-teal {
+  background: radial-gradient(circle at center, var(--teal-base) 20%, #0d1f1e 100%);
+  border: 1px solid var(--teal-border);
+  box-shadow: 
+    inset 0 0 60px var(--teal-glow),
+    inset 0 0 20px rgba(0, 201, 177, 0.1);
+}
+
+.tile-purple {
+  background: radial-gradient(circle at center, var(--purple-base) 20%, #120d1f 100%);
+  border: 1px solid var(--purple-border);
+  box-shadow: 
+    inset 0 0 60px var(--purple-glow),
+    inset 0 0 20px rgba(124, 58, 237, 0.1);
+}
+
+.tile-blue {
+  background: radial-gradient(circle at center, var(--blue-base) 20%, #0d1020 100%);
+  border: 1px solid var(--blue-border);
+  box-shadow: 
+    inset 0 0 60px var(--blue-glow),
+    inset 0 0 20px rgba(59, 91, 219, 0.1);
+}
+
+.tile-neutral {
+  background: var(--neutral-base);
+  border: 1px solid var(--neutral-border);
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.02);
+}
+
+.tile-neutral::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: radial-gradient(#ffffff 0.5px, transparent 0.5px);
+  background-size: 12px 12px;
+}
+
+/* --- Typography --- */
+.label-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.title-bold {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+}
+
+/* --- Inputs --- */
+.luminous-input-field {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  font-weight: 700;
+  outline: none;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.luminous-input-field:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.action-btn {
+  background: #ffffff;
+  color: #000;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* --- Demo Prompts --- */
+.demo-chip {
+  @apply px-3 py-1.5 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer hover:bg-white/5 hover:border-white/20;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
